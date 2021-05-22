@@ -32,7 +32,10 @@ def activate_view():
 
 @app.route('/playback/<command>', methods=["GET"])
 def playback(command):
-    pyautogui.press("space", logScreenshot=True)
+    try:
+        getattr(PlaybackControl(), command)()
+    except AttributeError:
+        return "error"
     return "done"
 
 
