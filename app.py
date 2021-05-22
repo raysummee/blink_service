@@ -1,7 +1,6 @@
 import json
-import re
 import socket
-
+from logic.utils.qr import Qr
 from werkzeug.serving import make_server
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -57,5 +56,6 @@ def start_server(host):
 
 if __name__ == '__main__':
     ip = socket.gethostbyname(socket.gethostname())
+    Qr(str(ip)).generate()
     # start server
     start_server(ip)
