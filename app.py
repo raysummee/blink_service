@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def home():
-    print(SystemInfo().minimalInfo())
+    # print(SystemInfo().minimalInfo())
     return render_template('home.html')
 
 
@@ -40,4 +40,6 @@ def playback(command):
 
 
 if __name__ == '__main__':
-    app.run()
+    print("Enter ip: ", end="")
+    host = input()
+    app.run(host=host)

@@ -139,3 +139,7 @@ cython_debug/
 
 __pycache__
 .idea
+
+app.spec
+build
+dist
