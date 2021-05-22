@@ -1,5 +1,7 @@
 import json
 import re
+import socket
+
 from werkzeug.serving import make_server
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -53,23 +55,7 @@ def start_server(host):
     app.run(host=host)
 
 
-def ip_address(arg_value):
-    pat = re.compile(
-        r"^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$")
-    if not pat.match(arg_value):
-        raise TypeError
-    return arg_value
-
-
 if __name__ == '__main__':
-    # Initialize parser
-    parser = argparse.ArgumentParser()
-
-    # Adding optional argument
-    parser.add_argument("ip", type=ip_address, help="The pc's ip address")
-
-    # Read arguments from command line
-    args = parser.parse_args()
-
+    ip = socket.gethostbyname(socket.gethostname())
     # start server
-    start_server(args.ip)
+    start_server(ip)
