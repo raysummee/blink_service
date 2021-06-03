@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import argparse
 from logic.automations.playback_control import PlaybackControl
+from logic.utils.systemInfo import SystemInfo
 
 app = Flask(__name__)
 app.config["ENV"] = "development"
@@ -56,6 +57,7 @@ def start_server(host):
 
 if __name__ == '__main__':
     ip = socket.gethostbyname(socket.gethostname())
-    Qr(str(ip)).generate()
+    qrData = SystemInfo().qrInfo()
+    Qr(str(qrData)).generate()
     # start server
     start_server(ip)
