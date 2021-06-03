@@ -10,10 +10,10 @@ class SystemInfo:
             "system": platform.platform()
         })
 
-    def qrInfo(self):
+    def qrInfo(self, ip):
         return json.dumps({
             "machine": platform.node(),
-            "address": socket.gethostbyname(socket.gethostname()),
+            "address": ip,
             "username": "user",
             "password": "test1234"
         })

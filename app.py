@@ -56,8 +56,16 @@ def start_server(host):
 
 
 if __name__ == '__main__':
-    ip = socket.gethostbyname(socket.gethostname())
-    qrData = SystemInfo().qrInfo()
+    ips = socket.gethostbyname_ex(socket.gethostname())[-1]
+    if type(ips) == list:
+        print("choose the specified ip")
+        for i in range(len(ips)):
+            print(str(i+1)+") "+ips[i])
+        indexIP = int(input())
+        ip = ips[indexIP-1]
+    else:
+        ip = ips
+    qrData = SystemInfo().qrInfo(ip)
     Qr(str(qrData)).generate()
     # start server
     start_server(ip)
