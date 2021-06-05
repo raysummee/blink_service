@@ -2,18 +2,14 @@ import platform
 import json
 import socket
 
+from flask_jwt_extended import create_access_token
+
 
 class SystemInfo:
-    def minimalInfo(self):
-        return json.dumps({
-            "machine": platform.machine(),
-            "system": platform.platform()
-        })
-
-    def qrInfo(self, ip):
+    @staticmethod
+    def qr_info(ip):
         return json.dumps({
             "machine": platform.node(),
             "address": ip,
-            "username": "user",
-            "password": "test1234"
+            "token": create_access_token(identity="username"),
         })

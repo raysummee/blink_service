@@ -1,6 +1,6 @@
 import json
 import socket
-
+import asyncio
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 
 from logic.utils.qr import Qr
@@ -23,7 +23,8 @@ jwt = JWTManager(app)
 
 @app.route('/')
 def home():
-    print(create_access_token(identity="username"))
+    qr_data = SystemInfo.qr_info(ip)
+    Qr(str(qr_data)).generate()
     return render_template('home.html')
 
 
@@ -74,7 +75,5 @@ if __name__ == '__main__':
         ip = ips[indexIP - 1]
     else:
         ip = ips
-    qrData = SystemInfo().qrInfo(ip)
-    Qr(str(qrData)).generate()
     # start server
     start_server(ip)
