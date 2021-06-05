@@ -42,7 +42,7 @@ def activate_view():
 @app.route('/playback', methods=["POST"])
 @jwt_required()
 def playback():
-    command = request.form.get("command")
+    command = request.json.get("command")
     if command is None:
         return "No command found"
     try:
